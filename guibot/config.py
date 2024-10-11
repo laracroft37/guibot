@@ -34,7 +34,7 @@ from .errors import *
 log = logging.getLogger("guibot.config")
 
 
-class GlobalConfig(type):
+class Config:
     """
     Metaclass used for the definition of static properties (the settings).
 
@@ -49,38 +49,39 @@ class GlobalConfig(type):
     a class object, i.e. a metaclass instance.
     """
 
-    # operational parameters shared between all instances
-    _toggle_delay = 0.05
-    _click_delay = 0.1
-    _drag_delay = 0.5
-    _drop_delay = 0.5
-    _keys_delay = 0.2
-    _type_delay = 0.1
-    _rescan_speed_on_find = 0.2
-    _wait_for_animations = False
-    _smooth_mouse_drag = True
-    _screen_autoconnect = True
-    _preprocess_special_chars = True
-    _save_needle_on_error = True
-    _image_logging_level = logging.ERROR
-    _image_logging_destination = "imglog"
-    _image_logging_step_width = 3
-    _image_quality = 3
+    def __init__(self) -> None:
+        """Operational parameters shared between all instances."""
+        self.toggle_delay = 0.05
+        self.click_delay = 0.1
+        self.drag_delay = 0.5
+        self.drop_delay = 0.5
+        self.keys_delay = 0.2
+        self.type_delay = 0.1
+        self.rescan_speed_on_find = 0.2
+        self.wait_for_animations = False
+        self.smooth_mouse_drag = True
+        self.screen_autoconnect = True
+        self.preprocess_special_chars = True
+        self.save_needle_on_error = True
+        self.image_logging_level = logging.ERROR
+        self.image_logging_destination = "imglog"
+        self.image_logging_step_width = 3
+        self.image_quality = 3
 
-    # backends shared between all instances
-    _display_control_backend = "pyautogui"
-    _find_backend = "hybrid"
-    _contour_threshold_backend = "adaptive"
-    _template_match_backend = "ccoeff_normed"
-    _feature_detect_backend = "ORB"
-    _feature_extract_backend = "ORB"
-    _feature_match_backend = "BruteForce-Hamming"
-    _text_detect_backend = "contours"
-    _text_ocr_backend = "pytesseract"
-    _deep_learn_backend = "pytorch"
-    _hybrid_match_backend = "template"
+        # backends shared between all instances
+        self.display_control_backend = "pyautogui"
+        self.find_backend = "hybrid"
+        self.contour_threshold_backend = "adaptive"
+        self.template_match_backend = "ccoeff_normed"
+        self.feature_detect_backend = "ORB"
+        self.feature_extract_backend = "ORB"
+        self.feature_match_backend = "BruteForce-Hamming"
+        self.text_detect_backend = "contours"
+        self.text_ocr_backend = "pytesseract"
+        self.deep_learn_backend = "pytorch"
+        self.hybrid_match_backend = "template"
 
-    def toggle_delay(cls, value: float = None) -> float | None:
+    def toggle_delay(self, value: float = None) -> float | None:
         """
         Get or set property attribute.
 
@@ -88,15 +89,15 @@ class GlobalConfig(type):
         :returns: current value if no argument was passed otherwise None
         """
         if value is None:
-            return cls._toggle_delay
+            return self._toggle_delay
         else:
-            cls._toggle_delay = value
+            self._toggle_delay = value
             return None
 
     #: time interval between mouse down and up in a click
     toggle_delay = property(fget=toggle_delay, fset=toggle_delay)
 
-    def click_delay(cls, value: float = None) -> float | None:
+    def click_delay(self, value: float = None) -> float | None:
         """
         Get or set property attribute.
 
@@ -104,15 +105,15 @@ class GlobalConfig(type):
         :returns: current value if no argument was passed otherwise None
         """
         if value is None:
-            return cls._click_delay
+            return self._click_delay
         else:
-            cls._click_delay = value
+            self._click_delay = value
             return None
 
     #: time interval after a click (in a double or n-click)
     click_delay = property(fget=click_delay, fset=click_delay)
 
-    def delay_after_drag(cls, value: float = None) -> float | None:
+    def delay_after_drag(self, value: float = None) -> float | None:
         """
         Get or set property attribute.
 
@@ -120,15 +121,15 @@ class GlobalConfig(type):
         :returns: current value if no argument was passed otherwise None
         """
         if value is None:
-            return cls._drag_delay
+            return self._drag_delay
         else:
-            cls._drag_delay = value
+            self._drag_delay = value
             return None
 
     #: timeout before drag operation
     delay_after_drag = property(fget=delay_after_drag, fset=delay_after_drag)
 
-    def delay_before_drop(cls, value: float = None) -> float | None:
+    def delay_before_drop(self, value: float = None) -> float | None:
         """
         Get or set property attribute.
 
@@ -136,15 +137,15 @@ class GlobalConfig(type):
         :returns: current value if no argument was passed otherwise None
         """
         if value is None:
-            return cls._drop_delay
+            return self._drop_delay
         else:
-            cls._drop_delay = value
+            self._drop_delay = value
             return None
 
     #: timeout before drop operation
     delay_before_drop = property(fget=delay_before_drop, fset=delay_before_drop)
 
-    def delay_before_keys(cls, value: float = None) -> float | None:
+    def delay_before_keys(self, value: float = None) -> float | None:
         """
         Get or set property attribute.
 
@@ -152,15 +153,15 @@ class GlobalConfig(type):
         :returns: current value if no argument was passed otherwise None
         """
         if value is None:
-            return cls._keys_delay
+            return self._keys_delay
         else:
-            cls._keys_delay = value
+            self._keys_delay = value
             return None
 
     #: timeout before key press operation
     delay_before_keys = property(fget=delay_before_keys, fset=delay_before_keys)
 
-    def delay_between_keys(cls, value: float = None) -> float | None:
+    def delay_between_keys(self, value: float = None) -> float | None:
         """
         Get or set property attribute.
 
@@ -168,15 +169,15 @@ class GlobalConfig(type):
         :returns: current value if no argument was passed otherwise None
         """
         if value is None:
-            return cls._type_delay
+            return self._type_delay
         else:
-            cls._type_delay = value
+            self._type_delay = value
             return None
 
     #: time interval between two consecutively typed keys
     delay_between_keys = property(fget=delay_between_keys, fset=delay_between_keys)
 
-    def rescan_speed_on_find(cls, value: float = None) -> float | None:
+    def rescan_speed_on_find(self, value: float = None) -> float | None:
         """
         Get or set property attribute.
 
@@ -185,9 +186,9 @@ class GlobalConfig(type):
         :returns: current value if no argument was passed otherwise None
         """
         if value is None:
-            return cls._rescan_speed_on_find
+            return self._rescan_speed_on_find
         else:
-            cls._rescan_speed_on_find = value
+            self._rescan_speed_on_find = value
             return None
 
     #: time interval between two image matching attempts (used to reduce overhead on the CPU)
@@ -195,7 +196,7 @@ class GlobalConfig(type):
         fget=rescan_speed_on_find, fset=rescan_speed_on_find
     )
 
-    def wait_for_animations(cls, value: bool = None) -> bool | None:
+    def wait_for_animations(self, value: bool = None) -> bool | None:
         """
         Getter/setter for property attribute.
 
@@ -208,9 +209,9 @@ class GlobalConfig(type):
         and the corresponding animation has finished.
         """
         if value is None:
-            return cls._wait_for_animations
+            return self._wait_for_animations
         elif value is True or value is False:
-            cls._wait_for_animations = value
+            self._wait_for_animations = value
             return None
         else:
             raise ValueError
@@ -218,7 +219,7 @@ class GlobalConfig(type):
     #: whether to wait for animations to complete and match only static (not moving) targets
     wait_for_animations = property(fget=wait_for_animations, fset=wait_for_animations)
 
-    def smooth_mouse_drag(cls, value: bool = None) -> bool | None:
+    def smooth_mouse_drag(self, value: bool = None) -> bool | None:
         """
         Getter/setter for property attribute.
 
@@ -230,9 +231,9 @@ class GlobalConfig(type):
         supervision or the need of debugging.
         """
         if value is None:
-            return cls._smooth_mouse_drag
+            return self._smooth_mouse_drag
         elif value is True or value is False:
-            cls._smooth_mouse_drag = value
+            self._smooth_mouse_drag = value
             return None
         else:
             raise ValueError
@@ -240,7 +241,7 @@ class GlobalConfig(type):
     #: whether to move the mouse cursor to a location instantly or smoothly
     smooth_mouse_drag = property(fget=smooth_mouse_drag, fset=smooth_mouse_drag)
 
-    def preprocess_special_chars(cls, value: bool = None) -> bool | None:
+    def preprocess_special_chars(self, value: bool = None) -> bool | None:
         """
         Getter/setter for property attribute.
 
@@ -252,9 +253,9 @@ class GlobalConfig(type):
             autopy on linux (capital and special) and vncdotool (capital) backends.
         """
         if value is None:
-            return cls._preprocess_special_chars
+            return self._preprocess_special_chars
         elif value is True or value is False:
-            cls._preprocess_special_chars = value
+            self._preprocess_special_chars = value
             return None
         else:
             raise ValueError
@@ -264,7 +265,7 @@ class GlobalConfig(type):
         fget=preprocess_special_chars, fset=preprocess_special_chars
     )
 
-    def save_needle_on_error(cls, value: bool = None) -> bool | None:
+    def save_needle_on_error(self, value: bool = None) -> bool | None:
         """
         Getter/setter for property attribute.
 
@@ -272,9 +273,9 @@ class GlobalConfig(type):
         :returns: current value if no argument was passed otherwise None
         """
         if value is None:
-            return cls._save_needle_on_error
+            return self._save_needle_on_error
         elif value is True or value is False:
-            cls._save_needle_on_error = value
+            self._save_needle_on_error = value
             return None
         else:
             raise ValueError
@@ -284,7 +285,7 @@ class GlobalConfig(type):
         fget=save_needle_on_error, fset=save_needle_on_error
     )
 
-    def image_logging_level(cls, value: int = None) -> int | None:
+    def image_logging_level(self, value: int = None) -> int | None:
         """
         Getter/setter for property attribute.
 
@@ -294,15 +295,15 @@ class GlobalConfig(type):
         .. seealso:: See the image logging documentation for more details.
         """
         if value is None:
-            return cls._image_logging_level
+            return self._image_logging_level
         else:
-            cls._image_logging_level = value
+            self._image_logging_level = value
             return None
 
     #: logging level similar to the python logging module
     image_logging_level = property(fget=image_logging_level, fset=image_logging_level)
 
-    def image_logging_step_width(cls, value: int = None) -> int | None:
+    def image_logging_step_width(self, value: int = None) -> int | None:
         """
         Getter/setter for property attribute.
 
@@ -311,9 +312,9 @@ class GlobalConfig(type):
         :returns: current value if no argument was passed otherwise None
         """
         if value is None:
-            return cls._image_logging_step_width
+            return self._image_logging_step_width
         else:
-            cls._image_logging_step_width = value
+            self._image_logging_step_width = value
             return None
 
     #: number of digits when enumerating the image logging steps, e.g. value=3 for 001, 002, etc.
@@ -321,7 +322,7 @@ class GlobalConfig(type):
         fget=image_logging_step_width, fset=image_logging_step_width
     )
 
-    def image_quality(cls, value: int = None) -> int | None:
+    def image_quality(self, value: int = None) -> int | None:
         """
         Getter/setter for property attribute.
 
@@ -331,16 +332,16 @@ class GlobalConfig(type):
         :returns: current value if no argument was passed otherwise None
         """
         if value is None:
-            return cls._image_quality
+            return self._image_quality
         else:
-            cls._image_quality = value
+            self._image_quality = value
             return None
 
     #: quality of the image dumps ranging from 0 for no compression to 9 for maximum compression
     # (used to save space and reduce the disk space needed for image logging)
     image_quality = property(fget=image_quality, fset=image_quality)
 
-    def image_logging_destination(cls, value: str = None) -> str | None:
+    def image_logging_destination(self, value: str = None) -> str | None:
         """
         Getter/setter for property attribute.
 
@@ -348,9 +349,9 @@ class GlobalConfig(type):
         :returns: current value if no argument was passed otherwise None
         """
         if value is None:
-            return cls._image_logging_destination
+            return self._image_logging_destination
         else:
-            cls._image_logging_destination = value
+            self._image_logging_destination = value
             return None
 
     #: relative path of the image logging steps
@@ -358,7 +359,7 @@ class GlobalConfig(type):
         fget=image_logging_destination, fset=image_logging_destination
     )
 
-    def display_control_backend(cls, value: str = None) -> str | None:
+    def display_control_backend(self, value: str = None) -> str | None:
         """
         Getter/setter for property attribute.
 
@@ -384,11 +385,11 @@ class GlobalConfig(type):
             i.e. the backend has to be installed or you will have unsatisfied imports.
         """
         if value is None:
-            return cls._display_control_backend
+            return self._display_control_backend
         else:
             if value not in ["autopy", "xdotool", "vncdotool", "qemu", "pyautogui"]:
                 raise ValueError("Unsupported backend for GUI actions '%s'" % value)
-            cls._display_control_backend = value
+            self._display_control_backend = value
             return None
 
     #: name of the display control backend
@@ -398,7 +399,7 @@ class GlobalConfig(type):
 
     # these methods do not check for valid values since this
     # is already done during region and target initialization
-    def find_backend(cls, value: str = None) -> str | None:
+    def find_backend(self, value: str = None) -> str | None:
         """
         Getter/setter for property attribute.
 
@@ -426,15 +427,15 @@ class GlobalConfig(type):
             i.e. the backend has to be installed or you will have unsatisfied imports.
         """
         if value is None:
-            return cls._find_backend
+            return self._find_backend
         else:
-            cls._find_backend = value
+            self._find_backend = value
             return None
 
     #: name of the computer vision backend
     find_backend = property(fget=find_backend, fset=find_backend)
 
-    def contour_threshold_backend(cls, value: str = None) -> str | None:
+    def contour_threshold_backend(self, value: str = None) -> str | None:
         """
         Getter/setter for property attribute.
 
@@ -444,9 +445,9 @@ class GlobalConfig(type):
         Supported backends: normal, adaptive, canny.
         """
         if value is None:
-            return cls._contour_threshold_backend
+            return self._contour_threshold_backend
         else:
-            cls._contour_threshold_backend = value
+            self._contour_threshold_backend = value
             return None
 
     #: name of the contour threshold backend
@@ -454,7 +455,7 @@ class GlobalConfig(type):
         fget=contour_threshold_backend, fset=contour_threshold_backend
     )
 
-    def template_match_backend(cls, value: str = None) -> str | None:
+    def template_match_backend(self, value: str = None) -> str | None:
         """
         Getter/setter for property attribute.
 
@@ -465,9 +466,9 @@ class GlobalConfig(type):
         ccorr_normed, ccoeff_normed.
         """
         if value is None:
-            return cls._template_match_backend
+            return self._template_match_backend
         else:
-            cls._template_match_backend = value
+            self._template_match_backend = value
             return None
 
     #: name of the template matching backend
@@ -475,7 +476,7 @@ class GlobalConfig(type):
         fget=template_match_backend, fset=template_match_backend
     )
 
-    def feature_detect_backend(cls, value: str = None) -> str | None:
+    def feature_detect_backend(self, value: str = None) -> str | None:
         """
         Getter/setter for property attribute.
 
@@ -486,9 +487,9 @@ class GlobalConfig(type):
         BruteForce-Hamming(2), in-house-raw, in-house-region.
         """
         if value is None:
-            return cls._feature_detect_backend
+            return self._feature_detect_backend
         else:
-            cls._feature_detect_backend = value
+            self._feature_detect_backend = value
             return None
 
     #: name of the feature detection backend
@@ -496,7 +497,7 @@ class GlobalConfig(type):
         fget=feature_detect_backend, fset=feature_detect_backend
     )
 
-    def feature_extract_backend(cls, value: str = None) -> str | None:
+    def feature_extract_backend(self, value: str = None) -> str | None:
         """
         Getter/setter for property attribute.
 
@@ -506,9 +507,9 @@ class GlobalConfig(type):
         Supported backends: ORB, FAST, STAR, GFTT, HARRIS, Dense, oldSURF.
         """
         if value is None:
-            return cls._feature_extract_backend
+            return self._feature_extract_backend
         else:
-            cls._feature_extract_backend = value
+            self._feature_extract_backend = value
             return None
 
     #: name of the feature extraction backend
@@ -516,7 +517,7 @@ class GlobalConfig(type):
         fget=feature_extract_backend, fset=feature_extract_backend
     )
 
-    def feature_match_backend(cls, value: str = None) -> str | None:
+    def feature_match_backend(self, value: str = None) -> str | None:
         """
         Getter/setter for property attribute.
 
@@ -526,9 +527,9 @@ class GlobalConfig(type):
         Supported backends: ORB, BRIEF, FREAK.
         """
         if value is None:
-            return cls._feature_match_backend
+            return self._feature_match_backend
         else:
-            cls._feature_match_backend = value
+            self._feature_match_backend = value
             return None
 
     #: name of the feature matching backend
@@ -536,7 +537,7 @@ class GlobalConfig(type):
         fget=feature_match_backend, fset=feature_match_backend
     )
 
-    def text_detect_backend(cls, value: str = None) -> str | None:
+    def text_detect_backend(self, value: str = None) -> str | None:
         """
         Getter/setter for property attribute.
 
@@ -546,15 +547,15 @@ class GlobalConfig(type):
         Supported backends: east, erstat, contours, components.
         """
         if value is None:
-            return cls._text_detect_backend
+            return self._text_detect_backend
         else:
-            cls._text_detect_backend = value
+            self._text_detect_backend = value
             return None
 
     #: name of the text detection backend
     text_detect_backend = property(fget=text_detect_backend, fset=text_detect_backend)
 
-    def text_ocr_backend(cls, value: str = None) -> str | None:
+    def text_ocr_backend(self, value: str = None) -> str | None:
         """
         Getter/setter for property attribute.
 
@@ -564,15 +565,15 @@ class GlobalConfig(type):
         Supported backends: pytesseract, tesserocr, tesseract (OpenCV), hmm, beamSearch.
         """
         if value is None:
-            return cls._text_ocr_backend
+            return self._text_ocr_backend
         else:
-            cls._text_ocr_backend = value
+            self._text_ocr_backend = value
             return None
 
     #: name of the optical character recognition backend
     text_ocr_backend = property(fget=text_ocr_backend, fset=text_ocr_backend)
 
-    def deep_learn_backend(cls, value: str = None) -> str | None:
+    def deep_learn_backend(self, value: str = None) -> str | None:
         """
         Getter/setter for property attribute.
 
@@ -582,15 +583,15 @@ class GlobalConfig(type):
         Supported backends: pytorch, tensorflow (partial).
         """
         if value is None:
-            return cls._deep_learn_backend
+            return self._deep_learn_backend
         else:
-            cls._deep_learn_backend = value
+            self._deep_learn_backend = value
             return None
 
     #: name of the deep learning backend
     deep_learn_backend = property(fget=deep_learn_backend, fset=deep_learn_backend)
 
-    def hybrid_match_backend(cls, value: str = None) -> str | None:
+    def hybrid_match_backend(self, value: str = None) -> str | None:
         """
         Getter/setter for property attribute.
 
@@ -600,26 +601,15 @@ class GlobalConfig(type):
         Supported backends: all nonhybrid backends of :py:func:`GlobalConfig.find_backend`.
         """
         if value is None:
-            return cls._hybrid_match_backend
+            return self._hybrid_match_backend
         else:
-            cls._hybrid_match_backend = value
+            self._hybrid_match_backend = value
             return None
 
     #: name of the hybrid matching backend for unconfigured one-step targets
     hybrid_match_backend = property(
         fget=hybrid_match_backend, fset=hybrid_match_backend
     )
-
-
-class GlobalConfig(object, metaclass=GlobalConfig):  # type: ignore
-    """
-    Handler for default configuration present in all cases where no specific value is set.
-
-    The methods of this class are shared among
-    all of its instances.
-    """
-
-    pass
 
 
 class TemporaryConfig(object):
