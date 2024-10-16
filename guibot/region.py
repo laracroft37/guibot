@@ -34,7 +34,7 @@ import os
 import logging
 
 # interconnected classes - carefully avoid circular reference
-from .config2 import Config
+from .config import GlobalConfig
 from .location import Location
 from .imagelogger import ImageLogger
 from .errors import *
@@ -650,7 +650,7 @@ class Region(object):
         :returns: match from finding the target or nothing if hovering over a known location
         """
         log.info("Hovering over %s", target_or_location)
-        smooth = LocalConfig.smooth_mouse_drag
+        smooth = GlobalConfig.smooth_mouse_drag
 
         # Handle Match
         from .match import Match
