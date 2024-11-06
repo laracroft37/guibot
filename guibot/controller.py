@@ -523,8 +523,8 @@ class AutoPyController(Controller):
 
         See base method for details.
         """
-        toggle_timeout = LocalConfig.toggle_delay
-        click_timeout = LocalConfig.click_delay
+        toggle_timeout = self.toggle_delay
+        click_timeout = self.click_delay
         button = self._mousemap.LEFT_BUTTON if button is None else button
         if modifiers is not None:
             self.keys_toggle(modifiers, True)
@@ -748,8 +748,8 @@ class XDoToolController(Controller):
 
         See base method for details.
         """
-        toggle_timeout = LocalConfig.toggle_delay
-        click_timeout = LocalConfig.click_delay
+        toggle_timeout = self.toggle_delay
+        click_timeout = self.click_delay
         button = self._mousemap.LEFT_BUTTON if button is None else button
         if modifiers is not None:
             self.keys_toggle(modifiers, True)
@@ -968,8 +968,8 @@ class VNCDoToolController(Controller):
 
         See base method for details.
         """
-        toggle_timeout = LocallConfig.toggle_delay
-        click_timeout = LocalConfig.click_delay
+        toggle_timeout = self.toggle_delay
+        click_timeout = self.click_delay
         button = self._mousemap.LEFT_BUTTON if button is None else button
         if modifiers is not None:
             self.keys_toggle(modifiers, True)
@@ -1182,8 +1182,8 @@ class PyAutoGUIController(Controller):
 
         See base method for details.
         """
-        toggle_timeout = LocalConfig.toggle_delay
-        click_timeout = LocalConfig.click_delay
+        toggle_timeout = self.toggle_delay
+        click_timeout = self.click_delay
         button = self._mousemap.LEFT_BUTTON if button is None else button
         if modifiers is not None:
             self.keys_toggle(modifiers, True)
