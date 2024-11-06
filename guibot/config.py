@@ -55,6 +55,7 @@ class GlobalConfig(type):
     _keys_delay = 0.2
     _type_delay = 0.1
     _rescan_speed_on_find = 0.2
+    _wait_for_animations = False
     _smooth_mouse_drag = True
     _screen_autoconnect = True
     _preprocess_special_chars = True
@@ -63,9 +64,6 @@ class GlobalConfig(type):
     _image_logging_destination = "imglog"
     _image_logging_step_width = 3
     _image_quality = 3
-    _wait_for_animations = False
-    _deep_learn_backend = "pytorch"
-    _hybrid_match_backend = "template"
 
     # backends shared between all instances
     _display_control_backend = "pyautogui"
@@ -77,6 +75,8 @@ class GlobalConfig(type):
     _feature_match_backend = "BruteForce-Hamming"
     _text_detect_backend = "contours"
     _text_ocr_backend = "pytesseract"
+    _deep_learn_backend = "pytorch"
+    _hybrid_match_backend = "template"
 
     def delay_after_drag(cls, value: float = None) -> float | None:
         """
@@ -680,9 +680,6 @@ class LocalConfig(object):
             self.__configure_backend()
         if synchronize:
             self.__synchronize_backend()
-
-        self._toggle_delay = 0.05
-        self._click_delay = 0.1
 
     @property
     def toggle_delay(self) -> float:

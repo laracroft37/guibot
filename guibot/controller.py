@@ -86,6 +86,8 @@ class Controller(LocalConfig):
             self.__configure_backend(reset=True)
         if synchronize:
             self.__synchronize_backend(reset=False)
+        self._toggle_delay = 0.05
+        self._click_delay = 0.1
 
     def get_width(self) -> int:
         """
@@ -525,7 +527,7 @@ class AutoPyController(Controller):
         """
         toggle_timeout = self.params.toggle_delay
         click_timeout = self.params.click_delay
-        button = self.params._mousemap.LEFT_BUTTON if button is None else button
+        button = self._mousemap.LEFT_BUTTON if button is None else button
         if modifiers is not None:
             self.keys_toggle(modifiers, True)
         for _ in range(count):
