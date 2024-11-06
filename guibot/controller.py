@@ -523,9 +523,9 @@ class AutoPyController(Controller):
 
         See base method for details.
         """
-        toggle_timeout = self.toggle_delay
-        click_timeout = self.click_delay
-        button = self._mousemap.LEFT_BUTTON if button is None else button
+        toggle_timeout = self.params.toggle_delay
+        click_timeout = self.params.click_delay
+        button = self.params._mousemap.LEFT_BUTTON if button is None else button
         if modifiers is not None:
             self.keys_toggle(modifiers, True)
         for _ in range(count):

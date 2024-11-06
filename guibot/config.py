@@ -684,7 +684,6 @@ class LocalConfig(object):
         self._toggle_delay = 0.05
         self._click_delay = 0.1
 
-
     @property
     def toggle_delay(self) -> float:
         """
