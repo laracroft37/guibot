@@ -684,36 +684,36 @@ class LocalConfig(object):
         self._toggle_delay = 0.05
         self._click_delay = 0.1
 
-    def toggle_delay(self, value: float = None) -> float | None:
+
+    @property
+    def toggle_delay(self) -> float:
         """
         Get or set property attribute.
 
         :param value: time interval between mouse down and up in a click
         :returns: current value if no argument was passed otherwise None
         """
-        if value is not None:
-            self._toggle_delay = value
-            return None
-        else:
-            return self._toggle_delay
+        return self._toggle_delay
 
     #: time interval between mouse down and up in a click
-    toggle_delay = property(fget=toggle_delay, fset=toggle_delay)
 
-    def click_delay(self, value: float = None) -> float | None:
+    @toggle_delay.setter
+    def toggle_delay(self, value: float) -> None:
+        self._toggle_delay = value
+
+    @property
+    def click_delay(self) -> float:
         """
         Get or set property attribute.
 
         :param value: time interval after a click (in a double or n-click)
         :returns: current value if no argument was passed otherwise None
         """
-        if value is not None:
-            self._click_delay = value
-            return None
-        else:
-            return self._click_delay
+        return self._click_delay
 
-    click_delay = property(fget=click_delay, fset=click_delay)
+    @click_delay.setter
+    def click_delay(self, value: float) -> None:
+        self._click_delay = value
 
     def __configure_backend(
         self, backend: str = None, category: str = "type", reset: bool = False
