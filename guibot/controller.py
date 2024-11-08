@@ -86,7 +86,8 @@ class Controller(LocalConfig):
             self.__configure_backend(reset=True)
         if synchronize:
             self.__synchronize_backend(reset=False)
-        self.params = {"toggle_delay": 0.05, "click_delay": 0.1}
+        self._toggle_delay = 0.05
+        self._click_delay = 0.1
 
     def get_width(self) -> int:
         """
@@ -377,7 +378,6 @@ class AutoPyController(Controller):
             self.__configure_backend(reset=True)
         if synchronize:
             self.__synchronize_backend(reset=False)
-        self.params = {"toggle_delay": 0.05, "click_delay": 0.1}
 
     def get_mouse_location(self) -> Location:
         """
@@ -525,8 +525,8 @@ class AutoPyController(Controller):
 
         See base method for details.
         """
-        toggle_timeout = self.params["toggle_delay"]
-        click_timeout = self.params["click_delay"]
+        toggle_timeout = self.params.toggle_delay
+        click_timeout = self.params.click_delay
         button = self._mousemap.LEFT_BUTTON if button is None else button
         if modifiers is not None:
             self.keys_toggle(modifiers, True)
@@ -602,7 +602,6 @@ class XDoToolController(Controller):
             self.__configure_backend(reset=True)
         if synchronize:
             self.__synchronize_backend(reset=False)
-        self.params = {"toggle_delay": 0.05, "click_delay": 0.1}
 
     def get_mouse_location(self) -> Location:
         """
@@ -751,8 +750,8 @@ class XDoToolController(Controller):
 
         See base method for details.
         """
-        toggle_timeout = self.params["toggle_delay"]
-        click_timeout = self.params["click_delay"]
+        toggle_timeout = self.toggle_delay
+        click_timeout = self.click_delay
         button = self._mousemap.LEFT_BUTTON if button is None else button
         if modifiers is not None:
             self.keys_toggle(modifiers, True)
@@ -832,7 +831,6 @@ class VNCDoToolController(Controller):
             self.__configure_backend(reset=True)
         if synchronize:
             self.__synchronize_backend(reset=False)
-        self.params = {"toggle_delay": 0.05, "click_delay": 0.1}
 
     def __configure_backend(
         self, backend: str = None, category: str = "vncdotool", reset: bool = False
@@ -972,8 +970,8 @@ class VNCDoToolController(Controller):
 
         See base method for details.
         """
-        toggle_timeout = self.params["toggle_delay"]
-        click_timeout = self.params["click_delay"]
+        toggle_timeout = self.toggle_delay
+        click_timeout = self.click_delay
         button = self._mousemap.LEFT_BUTTON if button is None else button
         if modifiers is not None:
             self.keys_toggle(modifiers, True)
@@ -1070,7 +1068,6 @@ class PyAutoGUIController(Controller):
             self.__configure_backend(reset=True)
         if synchronize:
             self.__synchronize_backend(reset=False)
-        self.params = {"toggle_delay": 0.05, "click_delay": 0.1}
 
     def get_mouse_location(self) -> Location:
         """
@@ -1187,8 +1184,8 @@ class PyAutoGUIController(Controller):
 
         See base method for details.
         """
-        toggle_timeout = self.params["toggle_delay"]
-        click_timeout = self.params["click_delay"]
+        toggle_timeout = self.toggle_delay
+        click_timeout = self.click_delay
         button = self._mousemap.LEFT_BUTTON if button is None else button
         if modifiers is not None:
             self.keys_toggle(modifiers, True)
