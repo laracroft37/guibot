@@ -532,7 +532,7 @@ class GlobalConfig(type):
         if value is None:
             return cls._text_ocr_backend
         else:
-            self._text_ocr_backend = value
+            cls._text_ocr_backend = value
             return None
 
     #: name of the optical character recognition backend
@@ -690,8 +690,6 @@ class LocalConfig(object):
         :returns: current value if no argument was passed otherwise None
         """
         return self._toggle_delay
-
-    #: time interval between mouse down and up in a click
 
     @toggle_delay.setter
     def toggle_delay(self, value: float) -> None:
