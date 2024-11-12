@@ -689,7 +689,7 @@ class LocalConfig(object):
         :param value: time interval between mouse down and up in a click
         :returns: current value if no argument was passed otherwise None
         """
-        return self._toggle_delay
+        return self.params.get("toggle_delay", 0.05)
 
     @toggle_delay.setter
     def toggle_delay(self, value: float) -> None:
@@ -703,7 +703,7 @@ class LocalConfig(object):
         :param value: time interval after a click (in a double or n-click)
         :returns: current value if no argument was passed otherwise None
         """
-        return self._click_delay
+        return self.params.get("click_delay", 0.1)
 
     @click_delay.setter
     def click_delay(self, value: float) -> None:
