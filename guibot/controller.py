@@ -86,8 +86,6 @@ class Controller(LocalConfig):
             self.__configure_backend(reset=True)
         if synchronize:
             self.__synchronize_backend(reset=False)
-        self._toggle_delay = 0.05
-        self._click_delay = 0.1
 
     def get_width(self) -> int:
         """
@@ -525,17 +523,22 @@ class AutoPyController(Controller):
 
         See base method for details.
         """
-        toggle_timeout = self.params.get("toggle_delay", 0.05)
-        click_timeout = self.params.get("click_delay", 0.1)
+        category = "mouse_click"
+        self.params[category] = {}
+        self.params[category]["toggle_delay"] = "0.05"
+        self.params[category]["click_delay"] = "0.1"
+
+        toggle_timeout = self.params[category]["toggle_delay"]
+        click_timeout = self.params[category]["click_delay"]
         button = self._mousemap.LEFT_BUTTON if button is None else button
         if modifiers is not None:
             self.keys_toggle(modifiers, True)
         for _ in range(count):
             self._backend_obj.mouse.click(button)
             # BUG: the mouse button of autopy is pressed down forever (on LEFT)
-            time.sleep(toggle_timeout)
+            time.sleep(float(toggle_timeout))
             self.mouse_up(button)
-            time.sleep(click_timeout)
+            time.sleep(float(click_timeout))
         if modifiers is not None:
             self.keys_toggle(modifiers, False)
 
@@ -750,8 +753,13 @@ class XDoToolController(Controller):
 
         See base method for details.
         """
-        toggle_timeout = self.params.get("toggle_delay", 0.05)
-        click_timeout = self.params.get("click_delay", 0.1)
+        category = "mouse_click"
+        self.params[category] = {}
+        self.params[category]["toggle_delay"] = "0.05"
+        self.params[category]["click_delay"] = "0.1"
+
+        toggle_timeout = self.params[category]["toggle_delay"]
+        click_timeout = self.params[category]["click_delay"]
         button = self._mousemap.LEFT_BUTTON if button is None else button
         if modifiers is not None:
             self.keys_toggle(modifiers, True)
@@ -759,9 +767,9 @@ class XDoToolController(Controller):
             # BUG: the xdotool click is too fast and non-configurable with timeout
             # self._backend_obj.run("click", str(button))
             self.mouse_down(button)
-            time.sleep(toggle_timeout)
+            time.sleep(float(toggle_timeout))
             self.mouse_up(button)
-            time.sleep(click_timeout)
+            time.sleep(float(click_timeout))
         if modifiers is not None:
             self.keys_toggle(modifiers, False)
 
@@ -970,8 +978,13 @@ class VNCDoToolController(Controller):
 
         See base method for details.
         """
-        toggle_timeout = self.params.get("toggle_delay", 0.05)
-        click_timeout = self.params.get("click_delay", 0.1)
+        category = "mouse_click"
+        self.params[category] = {}
+        self.params[category]["toggle_delay"] = "0.05"
+        self.params[category]["click_delay"] = "0.1"
+
+        toggle_timeout = self.params[category]["toggle_delay"]
+        click_timeout = self.params[category]["click_delay"]
         button = self._mousemap.LEFT_BUTTON if button is None else button
         if modifiers is not None:
             self.keys_toggle(modifiers, True)
@@ -980,9 +993,9 @@ class VNCDoToolController(Controller):
             # sent too fast, so we sleep between mouse up and down and avoid mousePress
             # self._backend_obj.mousePress(button)
             self.mouse_down(button)
-            time.sleep(toggle_timeout)
+            time.sleep(float(toggle_timeout))
             self.mouse_up(button)
-            time.sleep(click_timeout)
+            time.sleep(float(click_timeout))
         if modifiers is not None:
             self.keys_toggle(modifiers, False)
 
@@ -1184,8 +1197,13 @@ class PyAutoGUIController(Controller):
 
         See base method for details.
         """
-        toggle_timeout = self.params.get("toggle_delay", 0.05)
-        click_timeout = self.params.get("click_delay", 0.1)
+        category = "mouse_click"
+        self.params[category] = {}
+        self.params[category]["toggle_delay"] = "0.05"
+        self.params[category]["click_delay"] = "0.1"
+
+        toggle_timeout = self.params[category]["toggle_delay"]
+        click_timeout = self.params[category]["click_delay"]
         button = self._mousemap.LEFT_BUTTON if button is None else button
         if modifiers is not None:
             self.keys_toggle(modifiers, True)
@@ -1194,9 +1212,9 @@ class PyAutoGUIController(Controller):
             # control the toggle speed
             # self._backend_obj.click(clicks=count, interval=click_timeout, button=button)
             self._backend_obj.mouseDown(button=button)
-            time.sleep(toggle_timeout)
+            time.sleep(float(toggle_timeout))
             self._backend_obj.mouseUp(button=button)
-            time.sleep(click_timeout)
+            time.sleep(float(click_timeout))
         if modifiers is not None:
             self.keys_toggle(modifiers, False)
 
