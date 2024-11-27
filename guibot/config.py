@@ -49,7 +49,7 @@ class GlobalConfig(type):
     a class object, i.e. a metaclass instance.
     """
 
-    """Operational parameters shared between all instances."""
+    # Operational parameters shared between all instances.
     _drag_delay = 0.5
     _drop_delay = 0.5
     _keys_delay = 0.2
@@ -680,34 +680,6 @@ class LocalConfig(object):
             self.__configure_backend()
         if synchronize:
             self.__synchronize_backend()
-
-    @property
-    def toggle_delay(self) -> float:
-        """
-        Get or set property attribute.
-
-        :param value: time interval between mouse down and up in a click
-        :returns: current value if no argument was passed otherwise None
-        """
-        return self.params.get("toggle_delay", 0.05)
-
-    @toggle_delay.setter
-    def toggle_delay(self, value: float) -> None:
-        self._toggle_delay = value
-
-    @property
-    def click_delay(self) -> float:
-        """
-        Get or set property attribute.
-
-        :param value: time interval after a click (in a double or n-click)
-        :returns: current value if no argument was passed otherwise None
-        """
-        return self.params.get("click_delay", 0.1)
-
-    @click_delay.setter
-    def click_delay(self, value: float) -> None:
-        self._click_delay = value
 
     def __configure_backend(
         self, backend: str = None, category: str = "type", reset: bool = False
